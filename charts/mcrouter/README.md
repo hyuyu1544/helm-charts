@@ -8,7 +8,7 @@ The following table lists the configurable parameters of the Mcrouter chart and 
 
 | Parameter                     | Description                            | Default                                         |
 | ----------------------------- | -------------------------------------- | ----------------------------------------------- |
-| `controller` | Controller used for deploying the Mcrouter pods. Possible values: `daemonset`, `statefulset` or `deployment` | `daemonset` |
+| `controller` | Controller used for deploying the Mcrouter pods. Possible values: `daemonset`, `statefulset` or `deployment` | `deployment` |
 | `mcrouterCommandParams.hostPort` | Host port used by the all controller | `5000` |
 | `image`                         | Container's image                      | `jphalip/mcrouter:0.36.0`<br>Note: Third-party image (see [source](https://github.com/jphalip/mcrouter-docker))<br>It is recommended to build a new, up-to-date image based on the [official Dockerfile](https://github.com/facebook/mcrouter/blob/master/mcrouter/scripts/docker/Dockerfile) |
 | `mcrouterCommandParams.config` | The config file to use for the mcrouter command. If not provided, then a config file will automatically be generated based on the Memcached chart's parameters. | No value |
