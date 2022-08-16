@@ -1,0 +1,17 @@
+apiVersion: v1
+entries:
+  mcrouter:
+  - apiVersion: v3
+    appVersion: 0.0.0
+    created: "2022-08-16T16:13:39.871996+08:00"
+    description: Mcrouter (pronounced mc router) is a memcached protocol router for
+      scaling memcached deployments.
+    digest: ebbc9e31fc7949ab72f046ddfd6e6a48f82680ce6fd68a99350f23c818874cdb
+    home: https://github.com/facebook/mcrouter
+    name: mcrouter
+    sources:
+    - https://github.com/facebook/mcrouter
+    urls:
+    - https://github.com/hyuyu1544/helm-charts/releases/download/mcrouter-0.0.0/mcrouter-0.0.0.tgz
+    version: 0.0.0
+generated: "2022-08-16T16:13:39.87202+08:00"
