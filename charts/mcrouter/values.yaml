@@ -1,0 +1,79 @@
+## Container image
+image: hyuyu1544/docker-mcrouter:0.1.0
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 256m
+    memory: 512Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+service:
+  clusterIP: None
+  port: 5000
+  annotations: {}
+  externalTrafficPolicy: null
+
+## Parameters for the mcrouter command
+mcrouterCommandParams:
+  port: 5000
+  hostPort: 5000
+  config: |
+    {
+      "pools": {
+        "main": {
+          "servers": [ "mcrouter-memcached.rxnudh.0001.apne1.cache.amazonaws.com:11211" ]
+        },
+        "shadow": {
+          "servers": [ "mcrouter-memcached.rxnudh.0002.apne1.cache.amazonaws.com:11211" ]
+        }
+      },
+      "route": {
+        "type": "AllFastestRoute",
+        "children":["PoolRoute|main","PoolRoute|shadow"]
+      }
+    }
+  ## Pass a custom JSON config, if not specified one will be generated per the number of memcached replicas
+  ## https://github.com/facebook/mcrouter/wiki/Config-Files
+  # config: |
+
+## Pod controller. Possible values: "daemonset", "statefulset" or "deployment".
+controller: "deployment"
+
+clusterSuffix: cluster.local
+
+## Values for the statefulset controller
+statefulset:
+  ## Number of replicas
+  replicas: 1
+  ## Select AntiAffinity as either hard or soft, default is hard
+  antiAffinity: "hard"
+
+exporter:
+  enabled: false
+  serviceMonitor:
+    enabled: false
+  image:
+    repository: hyuyu1544/docker-mcrouter-exporter
+    tag: 0.1.0
+  container:
+    port: 9442
+  service:
+    port: 9442
+  resources: {}
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 65534
+  runAsGroup: 65534
+
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
