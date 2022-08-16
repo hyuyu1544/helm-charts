@@ -25,21 +25,8 @@ service:
 mcrouterCommandParams:
   port: 5000
   hostPort: 5000
-  config: |
-    {
-      "pools": {
-        "main": {
-          "servers": [ "mcrouter-memcached.rxnudh.0001.apne1.cache.amazonaws.com:11211" ]
-        },
-        "shadow": {
-          "servers": [ "mcrouter-memcached.rxnudh.0002.apne1.cache.amazonaws.com:11211" ]
-        }
-      },
-      "route": {
-        "type": "AllFastestRoute",
-        "children":["PoolRoute|main","PoolRoute|shadow"]
-      }
-    }
+  # config: |
+
   ## Pass a custom JSON config, if not specified one will be generated per the number of memcached replicas
   ## https://github.com/facebook/mcrouter/wiki/Config-Files
   # config: |
